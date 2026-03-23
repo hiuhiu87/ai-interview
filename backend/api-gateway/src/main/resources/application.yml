@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: api-gateway
+
+server:
+  port: ${SERVER_PORT:8080}
+
+app:
+  services:
+    cms:
+      base-url: ${CMS_BASE_URL:http://localhost:8081}
+    session:
+      base-url: ${SESSION_BASE_URL:http://localhost:8082}
+    worker:
+      base-url: ${WORKER_BASE_URL:http://localhost:8083}

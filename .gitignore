@@ -1,0 +1,44 @@
+# OS and editor files
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.iml
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Environment and local overrides
+.env
+.env.*
+!.env.example
+*.local
+docker-compose.override.yml
+
+# Backend build outputs
+backend/**/target/
+backend/**/out/
+*.class
+
+# Frontend dependencies and build outputs
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/.vite/
+frontend/coverage/
+
+# Temporary files
+.cache/
+tmp/
+temp/
