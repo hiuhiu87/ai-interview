@@ -16,30 +16,6 @@ public class QuestionTagId implements Serializable {
     @Column(name = "tag_id", nullable = false)
     private Integer tagId;
 
-    public QuestionTagId() {
-    }
-
-    public QuestionTagId(UUID questionId, Integer tagId) {
-        this.questionId = questionId;
-        this.tagId = tagId;
-    }
-
-    public UUID getQuestionId() {
-        return questionId;
-    }
-
-    public void setQuestionId(UUID questionId) {
-        this.questionId = questionId;
-    }
-
-    public Integer getTagId() {
-        return tagId;
-    }
-
-    public void setTagId(Integer tagId) {
-        this.tagId = tagId;
-    }
-
     @Override
     public boolean equals(Object object) {
         if (this == object) {

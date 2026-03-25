@@ -15,30 +15,6 @@ public class TemplateSkillTagId implements Serializable {
     @Column(name = "skill_tag_id", nullable = false)
     private Integer skillTagId;
 
-    public TemplateSkillTagId() {
-    }
-
-    public TemplateSkillTagId(Integer templateId, Integer skillTagId) {
-        this.templateId = templateId;
-        this.skillTagId = skillTagId;
-    }
-
-    public Integer getTemplateId() {
-        return templateId;
-    }
-
-    public void setTemplateId(Integer templateId) {
-        this.templateId = templateId;
-    }
-
-    public Integer getSkillTagId() {
-        return skillTagId;
-    }
-
-    public void setSkillTagId(Integer skillTagId) {
-        this.skillTagId = skillTagId;
-    }
-
     @Override
     public boolean equals(Object object) {
         if (this == object) {
