@@ -1,15 +1,17 @@
 spring:
   application:
     name: api-gateway
+  main:
+    web-application-type: reactive
 
 server:
-  port: ${SERVER_PORT:8080}
+  port: ${SERVER_PORT:8089}
 
 app:
-  services:
-    cms:
-      base-url: ${CMS_BASE_URL:http://localhost:8081}
-    session:
-      base-url: ${SESSION_BASE_URL:http://localhost:8082}
-    worker:
-      base-url: ${WORKER_BASE_URL:http://localhost:8083}
+  gateway:
+    url:
+      cms-service: ${CMS_BASE_URL:http://localhost:8081}
+      session-service: ${SESSION_BASE_URL:http://localhost:8082}
+      worker-service: ${WORKER_BASE_URL:http://localhost:8083}
+  allowed-origins: ${ALLOWED_ORIGINS:http://localhost:3000}
+

@@ -1,5 +1,6 @@
 package com.aiinterview.cms.entity;
 
+import com.aiinterview.common.entity.CommonEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,13 +8,21 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "templates")
-public class Template {
+public class Template extends CommonEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,38 +37,4 @@ public class Template {
     @OneToMany(mappedBy = "template")
     private List<TemplateSkillTag> templateSkillTags = new ArrayList<>();
 
-    public Template() {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public List<TemplateSkillTag> getTemplateSkillTags() {
-        return templateSkillTags;
-    }
-
-    public void setTemplateSkillTags(List<TemplateSkillTag> templateSkillTags) {
-        this.templateSkillTags = templateSkillTags;
-    }
 }

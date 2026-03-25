@@ -2,9 +2,9 @@ spring:
   application:
     name: ai-worker-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/interview_copilot
+    url: jdbc:postgresql://localhost:5432/worker-db
     username: postgres
-    password: password
+    password: postgres
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

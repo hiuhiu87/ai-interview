@@ -1,5 +1,6 @@
 package com.aiinterview.cms.entity;
 
+import com.aiinterview.common.entity.CommonEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -9,11 +10,20 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.UUID;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "rubrics")
-public class Rubric {
+public class Rubric extends CommonEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -29,38 +39,4 @@ public class Rubric {
     @Column(name = "criteria_description", nullable = false, columnDefinition = "TEXT")
     private String criteriaDescription;
 
-    public Rubric() {
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public Question getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(Question question) {
-        this.question = question;
-    }
-
-    public Integer getScoreLevel() {
-        return scoreLevel;
-    }
-
-    public void setScoreLevel(Integer scoreLevel) {
-        this.scoreLevel = scoreLevel;
-    }
-
-    public String getCriteriaDescription() {
-        return criteriaDescription;
-    }
-
-    public void setCriteriaDescription(String criteriaDescription) {
-        this.criteriaDescription = criteriaDescription;
-    }
 }

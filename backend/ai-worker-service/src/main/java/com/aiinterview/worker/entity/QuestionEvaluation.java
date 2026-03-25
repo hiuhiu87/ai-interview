@@ -1,16 +1,29 @@
 package com.aiinterview.worker.entity;
 
+import com.aiinterview.common.entity.CommonEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.UUID;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
-@Table(name = "question_evaluations")
-public class QuestionEvaluation {
+@Table(name = "question_evaluations", uniqueConstraints = {
+        @UniqueConstraint(name = "UniqueSessionAndQuestion", columnNames = {"session_id", "question_id"})
+})
+public class QuestionEvaluation extends CommonEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -34,62 +47,4 @@ public class QuestionEvaluation {
     @Column(name = "ai_feedback", columnDefinition = "TEXT")
     private String aiFeedback;
 
-    public QuestionEvaluation() {
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public UUID getSessionId() {
-        return sessionId;
-    }
-
-    public void setSessionId(UUID sessionId) {
-        this.sessionId = sessionId;
-    }
-
-    public UUID getQuestionId() {
-        return questionId;
-    }
-
-    public void setQuestionId(UUID questionId) {
-        this.questionId = questionId;
-    }
-
-    public Integer getAiScore() {
-        return aiScore;
-    }
-
-    public void setAiScore(Integer aiScore) {
-        this.aiScore = aiScore;
-    }
-
-    public Integer getInterviewerScore() {
-        return interviewerScore;
-    }
-
-    public void setInterviewerScore(Integer interviewerScore) {
-        this.interviewerScore = interviewerScore;
-    }
-
-    public String getAiEvidence() {
-        return aiEvidence;
-    }
-
-    public void setAiEvidence(String aiEvidence) {
-        this.aiEvidence = aiEvidence;
-    }
-
-    public String getAiFeedback() {
-        return aiFeedback;
-    }
-
-    public void setAiFeedback(String aiFeedback) {
-        this.aiFeedback = aiFeedback;
-    }
 }

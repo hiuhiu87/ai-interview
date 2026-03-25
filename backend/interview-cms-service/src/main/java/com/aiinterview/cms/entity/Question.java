@@ -1,5 +1,6 @@
 package com.aiinterview.cms.entity;
 
+import com.aiinterview.common.entity.CommonEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,6 +9,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -15,9 +20,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "questions")
-public class Question {
+public class Question extends CommonEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -42,77 +51,4 @@ public class Question {
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<QuestionTag> questionTags = new ArrayList<>();
 
-    public Question() {
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getExpectedAnswer() {
-        return expectedAnswer;
-    }
-
-    public void setExpectedAnswer(String expectedAnswer) {
-        this.expectedAnswer = expectedAnswer;
-    }
-
-    public List<String> getKeywords() {
-        return keywords;
-    }
-
-    public void setKeywords(List<String> keywords) {
-        this.keywords = keywords;
-    }
-
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
-    public List<Rubric> getRubrics() {
-        return rubrics;
-    }
-
-    public void setRubrics(List<Rubric> rubrics) {
-        this.rubrics = rubrics;
-    }
-
-    public List<QuestionTag> getQuestionTags() {
-        return questionTags;
-    }
-
-    public void setQuestionTags(List<QuestionTag> questionTags) {
-        this.questionTags = questionTags;
-    }
-
-    public void addRubric(Rubric rubric) {
-        rubrics.add(rubric);
-        rubric.setQuestion(this);
-    }
-
-    public void removeRubric(Rubric rubric) {
-        rubrics.remove(rubric);
-        rubric.setQuestion(null);
-    }
-
-    public void addQuestionTag(QuestionTag questionTag) {
-        questionTags.add(questionTag);
-        questionTag.setQuestion(this);
-    }
 }
