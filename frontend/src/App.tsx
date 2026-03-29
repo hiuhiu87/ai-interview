@@ -1,11 +1,19 @@
+import { Input } from "./components/ui/input";
+import { DemoDialog } from "./components/demo/DemoDialog";
+import DemoTable from "./components/demo/DemoTable";
+import { Sidebar } from "./components/layout/Sidebar";
+import { BrowserRouter } from "react-router-dom";
+import AppRouter from "./router";
+import { Toaster } from "sonner";
+
 function App() {
+
   return (
     <main className="app-shell">
-      <section className="app-card">
-        <p className="app-eyebrow">AI Interview</p>
-        <h1>Project skeleton</h1>
-        <p>The frontend has been reset to an empty starting point.</p>
-      </section>
+      <BrowserRouter>
+      <AppRouter/>
+      <Toaster position="top-right" />
+      </BrowserRouter>
     </main>
   )
 }
