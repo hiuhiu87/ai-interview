@@ -23,12 +23,16 @@ A B2B SaaS platform for IT Technical Interviews to eliminate interview bias and 
 
 ## Database Schema (ERD)
 [AI IDE: Refer to the logical relationships below for Entity creation]
+- Common audit fields inherited by persisted entities: `created_date`, `updated_date`
 - USER (id, full_name, email, role)
-- CANDIDATE (id, full_name, email, cv_url, applied_position)
-- SKILL_TAG (id, name, category)
+- CANDIDATE (id, full_name, email)
+- SKILL_TAG (id, name, category, parent_id, search_tags (JSONB))
+- TEMPLATE (id, name, code)
+- TEMPLATE_SKILL_TAG (template_id, skill_tag_id)
 - QUESTION (id, content, expected_answer, keywords (JSONB), level)
+- QUESTION_TAG (question_id, tag_id)
 - RUBRIC (id, question_id, score_level, criteria_description)
-- INTERVIEW_SESSION (id, interviewer_id, candidate_id, status, started_at, ended_at, ai_overall_summary, final_ai_score)
-- SESSION_RECORDING (id, session_id, audio_storage_url, full_transcript)
+- INTERVIEW_SESSION (id, interviewer_id, candidate_id, status, started_at, ended_at, ai_overall_summary, final_ai_score, final_interviewer_score, cv_url, applied_position)
+- SESSION_QUESTION (session_id, question_id, order_index)
 - INTERVIEWER_NOTE (id, session_id, question_id, tag_type, note_content, timestamp_seconds)
 - QUESTION_EVALUATION (id, session_id, question_id, ai_score, interviewer_score, ai_evidence, ai_feedback)
