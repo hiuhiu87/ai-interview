@@ -16,4 +16,9 @@ public class RequestMappingConstant {
     public static final String SESSION_API_VERSION_PREFIX = "/session/api/v1";
     public static final String WORKER_API_VERSION_PREFIX = "/worker/api/v1";
 
+
+    public static final String[] PUBLIC_ENDPOINTS = {
+            API_VERSION_PREFIX + "/ping",
+    };
+
 }

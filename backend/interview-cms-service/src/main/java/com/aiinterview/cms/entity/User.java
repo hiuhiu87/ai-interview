@@ -1,6 +1,7 @@
 package com.aiinterview.cms.entity;
 
 import com.aiinterview.common.entity.CommonEntity;
+import io.hypersistence.utils.hibernate.type.json.JsonBinaryType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,7 +12,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
+import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -32,7 +35,8 @@ public class User extends CommonEntity {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "role", nullable = false)
-    private String role;
+    @Column(name = "role", nullable = false, columnDefinition = "jsonb")
+    @Type(JsonBinaryType.class)
+    private List<String> role;
 
 }
