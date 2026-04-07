@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -42,8 +44,16 @@ public class Question extends CommonEntity {
     @Column(name = "keywords", columnDefinition = "jsonb")
     private List<String> keywords = new ArrayList<>();
 
-    @Column(name = "level")
-    private String level;
+    @Column(name = "difficulty")
+    private String difficulty;
+
+    @ManyToOne
+    @JoinColumn(name = "skill_id")
+    private Skill skill;
+
+    @ManyToOne
+    @JoinColumn(name = "template_id")
+    private Template template;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Rubric> rubrics = new ArrayList<>();

@@ -1,6 +1,8 @@
 package com.aiinterview.cms.core.ping;
 
 import com.aiinterview.common.constant.RequestMappingConstant;
+import com.aiinterview.common.response.CommonResponse;
+import com.aiinterview.common.response.CommonResponseFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class PingController {
 
     @GetMapping("/ping")
-    public ResponseEntity<String> ping() {
-        return ResponseEntity.ok("cms-pong");
+    public ResponseEntity<CommonResponse<String>> ping() {
+        return ResponseEntity.ok(CommonResponseFactory.success("cms-pong"));
     }
 
 }

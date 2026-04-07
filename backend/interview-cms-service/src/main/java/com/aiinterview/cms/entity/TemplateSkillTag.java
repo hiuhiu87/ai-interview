@@ -35,6 +35,6 @@ public class TemplateSkillTag extends CommonEntity {
     @MapsId("skillTagId")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "skill_tag_id", nullable = false)
-    private SkillTag skillTag;
+    private Tag tag;
 
 }

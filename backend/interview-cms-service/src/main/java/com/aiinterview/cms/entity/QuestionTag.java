@@ -35,6 +35,6 @@ public class QuestionTag extends CommonEntity {
     @MapsId("tagId")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tag_id", nullable = false)
-    private SkillTag skillTag;
+    private Tag tag;
 
 }

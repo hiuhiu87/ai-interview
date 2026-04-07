@@ -8,13 +8,21 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
-@Table(name = "skill_tags")
-public class SkillTag extends CommonEntity {
+@Table(name = "tags")
+public class Tag extends CommonEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,13 +31,18 @@ public class SkillTag extends CommonEntity {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
+    @Column(name = "code", nullable = false, unique = true)
+    private String code;
+
     @Column(name = "category")
     private String category;
 
-    @OneToMany(mappedBy = "skillTag")
+    @Column(name = "description", columnDefinition = "TEXT")
+    private String description;
+
+    @OneToMany(mappedBy = "tag")
     private List<QuestionTag> questionTags = new ArrayList<>();
 
-    @OneToMany(mappedBy = "skillTag")
+    @OneToMany(mappedBy = "tag")
     private List<TemplateSkillTag> templateSkillTags = new ArrayList<>();
-
 }
