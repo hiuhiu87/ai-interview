@@ -47,6 +47,7 @@ services:
       CMS_BASE_URL: http://interview-cms-service:8081
       SESSION_BASE_URL: http://interview-session-service:8082
       WORKER_BASE_URL: http://ai-worker-service:8083
+      ALLOWED_ORIGINS: http://localhost:3000,http://localhost:5173
     depends_on:
       - interview-cms-service
       - interview-session-service

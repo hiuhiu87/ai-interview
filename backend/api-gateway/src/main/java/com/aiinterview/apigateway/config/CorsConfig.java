@@ -8,6 +8,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsWebFilter;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Configuration
@@ -21,9 +22,13 @@ public class CorsConfig {
         CorsConfiguration corsConfig = new CorsConfiguration();
         Long MAX_AGE = 3600L;
         corsConfig.setMaxAge(MAX_AGE);
-        corsConfig.setAllowedOrigins(List.of(allowedOrigins));
+        corsConfig.setAllowedOrigins(Arrays.stream(allowedOrigins.split(","))
+                .map(String::trim)
+                .filter(value -> !value.isBlank())
+                .toList());
         corsConfig.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         corsConfig.setAllowedHeaders(List.of("Content-Type", "Authorization"));
+        corsConfig.setExposedHeaders(List.of("Authorization"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration(RequestMappingConstant.ALLOW_ALL, corsConfig);
