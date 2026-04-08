@@ -4,6 +4,7 @@ import {
   MessageCircleQuestion,
   ClipboardList,
   Video,
+  Tags,
 } from "lucide-react";
 import type { SidebarItemType } from "@/types/sidebar.types";
 import { ROUTER_PATH } from "@/constants/path";
@@ -19,13 +20,19 @@ export const ADMIN_SIDEBAR_ITEMS: SidebarItemType[] = [
   },
   {
     id: "admin-skills",
-    label: "Skills",
+    label: "Skill Tree",
     icon: Sparkles,
     path: `${adminPrefix}/${ROUTER_PATH.admin.children.skills.path}`,
   },
   {
+    id: "admin-catalog",
+    label: "Templates & Tags",
+    icon: Tags,
+    path: `${adminPrefix}/${ROUTER_PATH.admin.children.catalog.path}`,
+  },
+  {
     id: "admin-questions",
-    label: "Questions",
+    label: "Question Metadata",
     icon: MessageCircleQuestion,
     path: `${adminPrefix}/${ROUTER_PATH.admin.children.questions.path}`,
   },

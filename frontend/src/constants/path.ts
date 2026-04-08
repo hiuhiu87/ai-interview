@@ -33,6 +33,10 @@ export const ROUTER_PATH = {
         path: "skills",
         name: "admin-skills",
       },
+      catalog: {
+        path: "catalog",
+        name: "admin-catalog",
+      },
       questions: {
         path: "questions",
         name: "admin-questions",
