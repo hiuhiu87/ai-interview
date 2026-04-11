@@ -35,4 +35,7 @@ public class User extends CommonEntity {
     @Column(name = "role", nullable = false)
     private String role;
 
+    @Column(name = "picture")
+    private String picture;
+
 }
