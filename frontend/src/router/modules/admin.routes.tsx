@@ -5,7 +5,8 @@ import { ROUTER_PATH } from "@/constants/path";
 
 const Dashboard = lazy(() => import("@/pages/admin/dashboard/Dashboard"));
 const SkillTree = lazy(() => import("@/pages/admin/skills/Skills"));
-const Catalog = lazy(() => import("@/pages/admin/rubrics/Rubrics"));
+const Templates = lazy(() => import("@/pages/admin/templates/Templates"));
+const Users = lazy(() => import("@/pages/admin/users/Users"));
 const Questions = lazy(() => import("@/pages/admin/questions/Questions"));
 
 const withSuspense = (Component: React.ReactNode) => (
@@ -19,9 +20,9 @@ export const adminRoutes: RouteObject[] = [
     children: [
       { path: ROUTER_PATH.admin.children.dashboard.path, element: withSuspense(<Dashboard />) },
       { path: ROUTER_PATH.admin.children.skills.path, element: withSuspense(<SkillTree />) },
-      { path: ROUTER_PATH.admin.children.catalog.path, element: withSuspense(<Catalog />) },
+      { path: ROUTER_PATH.admin.children.templates.path, element: withSuspense(<Templates />) },
+      { path: ROUTER_PATH.admin.children.users.path, element: withSuspense(<Users />) },
       { path: ROUTER_PATH.admin.children.questions.path, element: withSuspense(<Questions />) },
-      { path: ROUTER_PATH.admin.children.rubrics.path, element: withSuspense(<Catalog />) },
     ],
     
   }
