@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 echo "Starting Dev Environment for AI Interview Copilot..."

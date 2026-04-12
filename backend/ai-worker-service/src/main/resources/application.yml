@@ -2,7 +2,7 @@ spring:
   application:
     name: ai-worker-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/worker-db
+    url: jdbc:postgresql://localhost:54333/worker-db
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver

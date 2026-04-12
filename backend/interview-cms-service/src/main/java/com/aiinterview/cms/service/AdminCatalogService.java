@@ -36,28 +36,27 @@ import java.util.UUID;
 @Transactional
 public class AdminCatalogService {
 
-    private static final List<String> DIFFICULTIES = List.of("BEGINNER", "INTERMEDIATE", "ADVANCED");
-
     private final SkillRepository skillRepository;
     private final TagRepository tagRepository;
     private final TemplateRepository templateRepository;
-    private final QuestionRepository questionRepository;
+    private final QuestionBuilderService questionBuilderService;
 
     public AdminCatalogService(
             SkillRepository skillRepository,
             TagRepository tagRepository,
             TemplateRepository templateRepository,
-            QuestionRepository questionRepository
+            QuestionBuilderService questionBuilderService
     ) {
         this.skillRepository = skillRepository;
         this.tagRepository = tagRepository;
         this.templateRepository = templateRepository;
-        this.questionRepository = questionRepository;
+        this.questionBuilderService = questionBuilderService;
     }
 
     public MetadataResponse getMetadata() {
         return new MetadataResponse(
-                DIFFICULTIES,
+                questionBuilderService.getSupportedDifficulties(),
+                questionBuilderService.getSupportedLevels(),
                 getSkills(),
                 getTags(),
                 getTemplates()
@@ -169,28 +168,19 @@ public class AdminCatalogService {
     }
 
     public List<QuestionResponse> getQuestions() {
-        return questionRepository.findAll()
-                .stream()
-                .sorted(Comparator.comparing(Question::getCreatedDate, Comparator.nullsLast(Long::compareTo)).reversed())
-                .map(this::toQuestionResponse)
-                .toList();
+        return questionBuilderService.getQuestions();
     }
 
     public QuestionResponse createQuestion(QuestionRequest request) {
-        Question question = new Question();
-        applyQuestion(question, request);
-        return toQuestionResponse(questionRepository.save(question));
+        return questionBuilderService.createQuestion(request);
     }
 
     public QuestionResponse updateQuestion(UUID id, QuestionRequest request) {
-        Question question = questionRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Question not found: " + id));
-        applyQuestion(question, request);
-        return toQuestionResponse(questionRepository.save(question));
+        return questionBuilderService.updateQuestion(id, request);
     }
 
     public void deleteQuestion(UUID id) {
-        questionRepository.deleteById(id);
+        questionBuilderService.deleteQuestion(id);
     }
 
     private void applySkill(Skill skill, SkillRequest request) {
@@ -227,29 +217,6 @@ public class AdminCatalogService {
             relation.setTemplate(template);
             relation.setTag(tag);
             template.getTemplateSkillTags().add(relation);
-        }
-    }
-
-    private void applyQuestion(Question question, QuestionRequest request) {
-        question.setContent(request.content().trim());
-        question.setExpectedAnswer(request.expectedAnswer());
-        question.setKeywords(request.keywords() == null ? new ArrayList<>() : new ArrayList<>(request.keywords()));
-        question.setDifficulty(request.difficulty());
-        question.setSkill(request.skillId() == null ? null : findSkill(request.skillId()));
-        question.setTemplate(request.templateId() == null ? null : findTemplate(request.templateId()));
-
-        question.getQuestionTags().clear();
-        if (request.tagIds() == null) {
-            return;
-        }
-
-        for (Integer tagId : request.tagIds()) {
-            Tag tag = findTag(tagId);
-            QuestionTag relation = new QuestionTag();
-            relation.setId(new QuestionTagId(question.getId(), tag.getId()));
-            relation.setQuestion(question);
-            relation.setTag(tag);
-            question.getQuestionTags().add(relation);
         }
     }
 
@@ -301,22 +268,4 @@ public class AdminCatalogService {
         );
     }
 
-    private QuestionResponse toQuestionResponse(Question question) {
-        return new QuestionResponse(
-                question.getId(),
-                question.getContent(),
-                question.getExpectedAnswer(),
-                question.getKeywords(),
-                question.getDifficulty(),
-                question.getSkill() != null ? question.getSkill().getId() : null,
-                question.getSkill() != null ? question.getSkill().getName() : null,
-                question.getTemplate() != null ? question.getTemplate().getId() : null,
-                question.getTemplate() != null ? question.getTemplate().getName() : null,
-                question.getQuestionTags().stream()
-                        .map(QuestionTag::getTag)
-                        .sorted(Comparator.comparing(Tag::getName))
-                        .map(this::toTagResponse)
-                        .toList()
-        );
-    }
 }

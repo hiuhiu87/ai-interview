@@ -47,6 +47,9 @@ public class Question extends CommonEntity {
     @Column(name = "difficulty")
     private String difficulty;
 
+    @Column(name = "level")
+    private String level;
+
     @ManyToOne
     @JoinColumn(name = "skill_id")
     private Skill skill;

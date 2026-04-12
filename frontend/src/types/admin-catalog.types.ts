@@ -33,18 +33,28 @@ export type QuestionItem = {
   expectedAnswer?: string | null;
   keywords: string[];
   difficulty?: string | null;
+  level?: string | null;
   skillId?: number | null;
   skillName?: string | null;
   templateId?: number | null;
   templateName?: string | null;
   tags: TagItem[];
+  skillTags: TagItem[];
+  rubrics: RubricItem[];
 };
 
 export type CatalogMetadata = {
   difficulties: string[];
+  levels: string[];
   skills: SkillNode[];
   tags: TagItem[];
   templates: TemplateItem[];
+};
+
+export type RubricItem = {
+  id?: string;
+  scoreLevel: number;
+  criteriaDescription: string;
 };
 
 export type CommonApiResponse<T> = {
@@ -84,7 +94,24 @@ export type QuestionPayload = {
   expectedAnswer?: string;
   keywords: string[];
   difficulty?: string;
+  level: string;
   skillId?: number | null;
   templateId?: number | null;
   tagIds: number[];
+  rubrics: RubricItem[];
+};
+
+export type DifficultyRuleConfig = {
+  easy: number;
+  medium: number;
+  hard: number;
+};
+
+export type GenerateQuestionSetPayload = {
+  templateId: number;
+  difficultyRuleConfig: DifficultyRuleConfig;
+};
+
+export type QuestionSetResponse = {
+  questions: QuestionItem[];
 };

@@ -9,10 +9,13 @@ public record QuestionResponse(
         String expectedAnswer,
         List<String> keywords,
         String difficulty,
+        String level,
         Integer skillId,
         String skillName,
         Integer templateId,
         String templateName,
-        List<TagResponse> tags
+        List<TagResponse> tags,
+        List<TagResponse> skillTags,
+        List<RubricResponse> rubrics
 ) {
 }

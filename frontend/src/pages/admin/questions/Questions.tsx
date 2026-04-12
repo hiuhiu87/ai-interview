@@ -26,6 +26,7 @@ type QuestionFormState = {
   expectedAnswer: string;
   keywords: string;
   difficulty: string;
+  level: string;
   skillId: string;
   templateId: string;
   tagIds: number[];
@@ -36,6 +37,7 @@ const defaultForm: QuestionFormState = {
   expectedAnswer: "",
   keywords: "",
   difficulty: "",
+  level: "",
   skillId: "",
   templateId: "",
   tagIds: [],
@@ -102,9 +104,11 @@ export default function Questions() {
         .map((item) => item.trim())
         .filter(Boolean),
       difficulty: form.difficulty || undefined,
+      level: form.level || "mid",
       skillId: form.skillId ? Number(form.skillId) : null,
       templateId: form.templateId ? Number(form.templateId) : null,
       tagIds: form.tagIds,
+      rubrics: [{ scoreLevel: 1, criteriaDescription: "Baseline evaluation criteria" }],
     };
 
     try {
@@ -187,6 +191,7 @@ export default function Questions() {
                         expectedAnswer: question.expectedAnswer ?? "",
                         keywords: question.keywords.join(", "),
                         difficulty: question.difficulty ?? "",
+                        level: question.level ?? "",
                         skillId: question.skillId?.toString() ?? "",
                         templateId: question.templateId?.toString() ?? "",
                         tagIds: question.tags.map((tag) => tag.id),

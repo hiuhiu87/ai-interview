@@ -2,8 +2,10 @@ import api from "@/services/api";
 import type {
   CatalogMetadata,
   CommonApiResponse,
+  GenerateQuestionSetPayload,
   QuestionItem,
   QuestionPayload,
+  QuestionSetResponse,
   SkillNode,
   SkillPayload,
   TagItem,
@@ -15,6 +17,18 @@ import type {
 const basePath = "/admin/catalog";
 
 export const adminCatalogService = {
+  getCmsQuestions: async () => {
+    const response = await api.get<CommonApiResponse<QuestionItem[]>>("/cms/questions");
+    return response.data.data;
+  },
+  createCmsQuestion: async (payload: QuestionPayload) => {
+    const response = await api.post<CommonApiResponse<QuestionItem>>("/cms/questions", payload);
+    return response.data.data;
+  },
+  generateQuestionSet: async (payload: GenerateQuestionSetPayload) => {
+    const response = await api.post<CommonApiResponse<QuestionSetResponse>>("/cms/question-set/generate", payload);
+    return response.data.data;
+  },
   getMetadata: async () => {
     const response = await api.get<CommonApiResponse<CatalogMetadata>>(`${basePath}/metadata`);
     return response.data.data;
@@ -78,5 +92,17 @@ export const adminCatalogService = {
   },
   deleteQuestion: async (id: string) => {
     await api.delete(`${basePath}/questions/${id}`);
+  },
+  generateQuestionsFromJD: async (payload: {
+    jobDescription: string;
+    skillId: number | null;
+    templateId: number | null;
+    tagIds: number[];
+  }) => {
+    const response = await api.post<CommonApiResponse<QuestionItem[]>>(
+      "/cms/questions/generate-from-jd",
+      payload
+    );
+    return response.data.data;
   },
 };

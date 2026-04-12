@@ -15,4 +15,8 @@ public interface TemplateRepository extends JpaRepository<Template, Integer> {
     @Override
     @EntityGraph(attributePaths = {"skill", "templateSkillTags", "templateSkillTags.tag"})
     List<Template> findAll();
+
+    @Override
+    @EntityGraph(attributePaths = {"skill", "templateSkillTags", "templateSkillTags.tag"})
+    Optional<Template> findById(Integer id);
 }

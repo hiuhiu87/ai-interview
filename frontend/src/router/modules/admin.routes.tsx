@@ -6,7 +6,7 @@ import { ROUTER_PATH } from "@/constants/path";
 const Dashboard = lazy(() => import("@/pages/admin/dashboard/Dashboard"));
 const SkillTree = lazy(() => import("@/pages/admin/skills/Skills"));
 const Catalog = lazy(() => import("@/pages/admin/rubrics/Rubrics"));
-const Questions = lazy(() => import("@/pages/admin/questions/Questions"));
+const Questions = lazy(() => import("@/pages/admin/questions/QuestionBuilderPage"));
 
 const withSuspense = (Component: React.ReactNode) => (
   <Suspense fallback={<div>Loading...</div>}>{Component}</Suspense>
