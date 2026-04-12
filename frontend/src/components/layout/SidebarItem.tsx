@@ -10,11 +10,11 @@ interface SidebarItemProps {
 
 export function SidebarItem({ item, isActive, collapsed, onClick }: SidebarItemProps) {
   const ActiveClass = isActive
-    ? "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-200"
-    : "text-gray-700 dark:text-gray-200";
+    ? "bg-[#171717] text-white dark:bg-white dark:text-[#171717]"
+    : "text-[rgba(23,23,23,0.72)] dark:text-white/80";
 
   const baseClass =
-    "flex items-center gap-3 rounded-lg px-3 py-2 transition-all duration-150 hover:bg-blue-50 hover:text-blue-700 dark:hover:bg-blue-950/40 dark:hover:text-blue-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500";
+    "flex items-center gap-3 rounded-lg px-3 py-2 transition-all duration-150 hover:bg-[rgba(23,23,23,0.05)] hover:text-[#171717] dark:hover:bg-white/10 dark:hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(23,23,23,0.2)]";
 
   return (
     <button type="button" onClick={onClick} className={`${baseClass} ${ActiveClass} w-full text-left`}>
