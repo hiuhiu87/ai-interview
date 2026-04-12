@@ -45,6 +45,10 @@ export const ROUTER_PATH = {
         path: "rubrics",
         name: "admin-rubrics",
       },
+      questionGenerator: {
+        path: "questionGenerator",
+        name: "admin-question-Generator",
+      },
     },
   },
   interviewer: {

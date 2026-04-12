@@ -7,6 +7,7 @@ const Dashboard = lazy(() => import("@/pages/admin/dashboard/Dashboard"));
 const SkillTree = lazy(() => import("@/pages/admin/skills/Skills"));
 const Catalog = lazy(() => import("@/pages/admin/rubrics/Rubrics"));
 const Questions = lazy(() => import("@/pages/admin/questions/QuestionBuilderPage"));
+const QuestionGenerator = lazy(() => import("@/pages/admin/questions/QuestionGeneratorPage"));
 
 const withSuspense = (Component: React.ReactNode) => (
   <Suspense fallback={<div>Loading...</div>}>{Component}</Suspense>
@@ -21,7 +22,7 @@ export const adminRoutes: RouteObject[] = [
       { path: ROUTER_PATH.admin.children.skills.path, element: withSuspense(<SkillTree />) },
       { path: ROUTER_PATH.admin.children.catalog.path, element: withSuspense(<Catalog />) },
       { path: ROUTER_PATH.admin.children.questions.path, element: withSuspense(<Questions />) },
-      { path: ROUTER_PATH.admin.children.rubrics.path, element: withSuspense(<Catalog />) },
+      { path: ROUTER_PATH.admin.children.questionGenerator.path, element: withSuspense(<QuestionGenerator />) },
     ],
     
   }

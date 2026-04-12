@@ -5,6 +5,7 @@ import {
   ClipboardList,
   Video,
   Tags,
+  Wand2,
 } from "lucide-react";
 import type { SidebarItemType } from "@/types/sidebar.types";
 import { ROUTER_PATH } from "@/constants/path";
@@ -37,10 +38,10 @@ export const ADMIN_SIDEBAR_ITEMS: SidebarItemType[] = [
     path: `${adminPrefix}/${ROUTER_PATH.admin.children.questions.path}`,
   },
   {
-    id: "admin-rubrics",
-    label: "Rubrics",
-    icon: ClipboardList,
-    path: `${adminPrefix}/${ROUTER_PATH.admin.children.rubrics.path}`,
+    id: "admin-question-generator",
+    label: "Question Generator",
+    icon: Wand2,
+    path: `${adminPrefix}/${ROUTER_PATH.admin.children.questionGenerator.path}`,
   },
 ];
 

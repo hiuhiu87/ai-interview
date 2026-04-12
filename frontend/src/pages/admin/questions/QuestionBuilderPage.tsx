@@ -6,15 +6,12 @@ import type { QuestionItem, SkillNode, TagItem, TemplateItem } from "@/types";
 import { QuestionBuilderDialog } from "./components/QuestionBuilderDialog";
 import { QuestionFilters } from "./components/QuestionFilters";
 import { QuestionList } from "./components/QuestionList";
-import { QuestionSetGenerator } from "./components/QuestionSetGenerator";
 import { GenerateFromJDSection } from "./GenerateFromJDSection";
 import {
   defaultFilters,
-  defaultGeneratorForm,
   defaultQuestionForm,
   flattenSkills,
   toQuestionForm,
-  type GeneratorFormState,
   type QuestionFiltersState,
   type QuestionFormState,
 } from "./question-builder.utils";
@@ -30,7 +27,6 @@ export default function QuestionBuilderPage() {
   const [levels, setLevels] = useState<string[]>([]);
   const [filters, setFilters] = useState<QuestionFiltersState>(defaultFilters);
   const [form, setForm] = useState<QuestionFormState>(defaultQuestionForm);
-  const [generatorForm, setGeneratorForm] = useState<GeneratorFormState>(defaultGeneratorForm);
   const [currentPage, setCurrentPage] = useState(1);
   const [isBuilderOpen, setIsBuilderOpen] = useState(false);
 
@@ -153,12 +149,6 @@ export default function QuestionBuilderPage() {
           setIsBuilderOpen(true);
         }}
         onDelete={handleDelete}
-      />
-
-      <QuestionSetGenerator
-        templates={templates}
-        form={generatorForm}
-        onFormChange={setGeneratorForm}
       />
 
       <QuestionBuilderDialog
