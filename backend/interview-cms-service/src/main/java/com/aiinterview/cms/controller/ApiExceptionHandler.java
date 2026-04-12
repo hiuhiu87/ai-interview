@@ -30,4 +30,10 @@ public class ApiExceptionHandler {
         return ResponseEntity.badRequest()
                 .body(CommonResponseFactory.error(payload, "Validation failed", HttpStatus.BAD_REQUEST.value()));
     }
+
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<CommonResponse<Map<String, String>>> handleIllegalState(IllegalStateException exception) {
+        return ResponseEntity.badRequest()
+                .body(CommonResponseFactory.error(Map.of(), exception.getMessage(), HttpStatus.BAD_REQUEST.value()));
+    }
 }
