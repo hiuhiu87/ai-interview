@@ -40,7 +40,14 @@ export type QuestionItem = {
   tags: TagItem[];
 };
 
-export type CatalogMetadata = {
+export type UserItem = {
+  id: string;
+  fullName: string;
+  email: string;
+  role: "ADMIN" | "INTERVIEWER";
+};
+
+export type AdminMetadata = {
   difficulties: string[];
   skills: SkillNode[];
   tags: TagItem[];
@@ -87,4 +94,10 @@ export type QuestionPayload = {
   skillId?: number | null;
   templateId?: number | null;
   tagIds: number[];
+};
+
+export type UserPayload = {
+  fullName: string;
+  email: string;
+  role: "ADMIN" | "INTERVIEWER";
 };
