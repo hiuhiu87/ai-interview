@@ -18,11 +18,17 @@ public abstract class CommonEntity {
     @Column(name = "updated_date")
     private Long updatedDate;
 
+    @Column(name = "deleted")
+    private Boolean deleted;
+
     @PrePersist
     private void prePersist() {
         long currentTime = System.currentTimeMillis();
         this.createdDate = currentTime;
         this.updatedDate = currentTime;
+        if (this.deleted == null) {
+            this.deleted = false;
+        }
     }
 
     @PreUpdate

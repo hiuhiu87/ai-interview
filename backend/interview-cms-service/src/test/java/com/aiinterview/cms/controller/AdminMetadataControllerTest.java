@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class AdminCatalogControllerTest {
+class AdminMetadataControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -27,7 +27,7 @@ class AdminCatalogControllerTest {
     private ObjectMapper objectMapper;
 
     @Test
-    void shouldCreateCatalogDataAndExposeMetadata() throws Exception {
+    void shouldCreateMetadataDataAndExposeMetadata() throws Exception {
         String skillPayload = objectMapper.writeValueAsString(Map.of(
                 "name", "Frontend",
                 "code", "FRONTEND",
@@ -42,7 +42,7 @@ class AdminCatalogControllerTest {
                 "description", "React focused"
         ));
 
-        mockMvc.perform(post("/api/v1/admin/catalog/skills")
+        mockMvc.perform(post("/api/v1/admin/skills")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(skillPayload))
                 .andExpect(status().isCreated())
@@ -50,7 +50,7 @@ class AdminCatalogControllerTest {
                 .andExpect(jsonPath("$.message").value("Created"))
                 .andExpect(jsonPath("$.code").value(0));
 
-        mockMvc.perform(post("/api/v1/admin/catalog/tags")
+        mockMvc.perform(post("/api/v1/admin/tags")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(tagPayload))
                 .andExpect(status().isCreated())
@@ -65,7 +65,7 @@ class AdminCatalogControllerTest {
                 "tagIds", List.of(1)
         ));
 
-        mockMvc.perform(post("/api/v1/admin/catalog/templates")
+        mockMvc.perform(post("/api/v1/admin/templates")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(templatePayload))
                 .andExpect(status().isCreated())
@@ -81,14 +81,14 @@ class AdminCatalogControllerTest {
                 "tagIds", List.of(1)
         ));
 
-        mockMvc.perform(post("/api/v1/admin/catalog/questions")
+        mockMvc.perform(post("/api/v1/admin/questions")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(questionPayload))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.data.skillName").value("Frontend"))
                 .andExpect(jsonPath("$.data.templateName").value("Frontend Screen"));
 
-        mockMvc.perform(get("/api/v1/admin/catalog/metadata"))
+        mockMvc.perform(get("/api/v1/admin/metadata"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data.difficulties[0]").value("BEGINNER"))
                 .andExpect(jsonPath("$.data.skills[0].name").value("Frontend"))
@@ -96,5 +96,22 @@ class AdminCatalogControllerTest {
                 .andExpect(jsonPath("$.data.templates[0].code").value("FE_SCREEN"))
                 .andExpect(jsonPath("$.request_id").isString())
                 .andExpect(jsonPath("$.server_time").isNumber());
+
+        String userPayload = objectMapper.writeValueAsString(Map.of(
+                "fullName", "Alice Admin",
+                "email", "alice.admin@example.com",
+                "role", "ADMIN"
+        ));
+
+        mockMvc.perform(post("/api/v1/admin/users")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(userPayload))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.data.fullName").value("Alice Admin"))
+                .andExpect(jsonPath("$.data.role").value("ADMIN"));
+
+        mockMvc.perform(get("/api/v1/admin/users"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data[0].email").value("alice.admin@example.com"));
     }
 }
