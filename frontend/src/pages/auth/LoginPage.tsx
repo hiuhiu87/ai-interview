@@ -33,13 +33,13 @@ export default function LoginPage() {
 
     const adminFake = {
       id: "1",
-      name: "Hùng Vũ",
+      name: "Hung Vu",
       email: "hungvt@gmail.com",
       role: "ADMIN"
     } as User;
     const interviewerFake = {
       id: "2",
-      name: "Hùng Vũ",
+      name: "Hung Vu",
       email: "hungvt@gmail.com",
       role: "INTERVIEWER"
     } as User;
@@ -63,15 +63,15 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex w-screen min-h-screen items-center justify-center bg-gray-50 dark:bg-slate-950 px-4">
-      <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-md dark:bg-slate-900">
+    <div className="flex w-screen min-h-screen items-center justify-center bg-white px-4 dark:bg-[#171717]">
+      <div className="w-full max-w-md rounded-2xl border border-[rgba(23,23,23,0.12)] bg-white p-6 shadow-[0_20px_60px_rgba(23,23,23,0.08)] dark:border-white/10 dark:bg-[#171717]">
 
-        <h2 className="text-2xl font-semibold text-center text-gray-800 dark:text-white">
+        <h2 className="text-2xl font-semibold text-center text-[#171717] dark:text-white">
           Login
         </h2>
 
         {error && (
-          <div className="mt-4 rounded-md bg-red-100 px-3 py-2 text-sm text-red-600">
+          <div className="mt-4 rounded-md border border-[rgba(23,23,23,0.12)] bg-[rgba(23,23,23,0.04)] px-3 py-2 text-sm text-[#171717] dark:border-white/10 dark:bg-white/5 dark:text-white">
             {error}
           </div>
         )}
@@ -85,7 +85,7 @@ export default function LoginPage() {
             placeholder="Username"
             value={form.username}
             onChange={handleChange}
-            className="w-full rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-800 dark:border-gray-700"
+            className="w-full rounded-md border border-[rgba(23,23,23,0.14)] bg-white px-3 py-2 text-sm text-[#171717] shadow-[0_1px_2px_rgba(23,23,23,0.04)] focus:outline-none focus:ring-4 focus:ring-[rgba(23,23,23,0.08)] focus:border-[#171717] dark:border-white/12 dark:bg-[#171717] dark:text-white"
             required
           />
 
@@ -95,14 +95,14 @@ export default function LoginPage() {
             placeholder="Password"
             value={form.password}
             onChange={handleChange}
-            className="w-full rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-800 dark:border-gray-700"
+            className="w-full rounded-md border border-[rgba(23,23,23,0.14)] bg-white px-3 py-2 text-sm text-[#171717] shadow-[0_1px_2px_rgba(23,23,23,0.04)] focus:outline-none focus:ring-4 focus:ring-[rgba(23,23,23,0.08)] focus:border-[#171717] dark:border-white/12 dark:bg-[#171717] dark:text-white"
             required
           />
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-md bg-blue-600 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
+            className="w-full rounded-md bg-[#171717] py-2 text-sm font-medium text-white hover:bg-[#2a2a2a] disabled:opacity-50 dark:bg-white dark:text-[#171717] dark:hover:bg-white/90"
           >
             {loading ? "Logging in..." : "Login"}
           </button>

@@ -23,9 +23,9 @@ export function DemoDialog() {
         <div>Form goes here...</div>
         <div className="flex gap-2 justify-end">
           <DialogClose asChild>
-            <Button className="bg-gray-600">Đóng</Button>
+            <Button className="bg-gray-600">Close</Button>
           </DialogClose>
-          <Button>Thêm mới</Button>
+          <Button>Create</Button>
         </div>
       </DialogContent>
     </Dialog>
